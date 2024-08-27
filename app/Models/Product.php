@@ -4,24 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Category extends Model
+class Product extends Model
 {
     use HasFactory;
 
     public $timestamps = true;
     public $incrementing = true;
-    protected $table = 'categories';
+    protected $table = 'products';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
 
     protected $fillable = [
-        'name'
+        'name',
+        'description',
+        'price',
+        'image',
+        'category_id'
     ];
 
-    public function products(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Product::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }
