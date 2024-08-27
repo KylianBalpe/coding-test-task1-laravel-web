@@ -24,7 +24,8 @@
                 </li>
                 <li class="nav-header">MENU</li>
                 <li class="nav-item">
-                    <a href="" class="nav-link {{ Request::is('category*') ? 'active' : '' }}">
+                    <a href="{{ route('category.index') }}"
+                       class="nav-link {{ Request::is('category*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cubes"></i>
                         <p>Category</p>
                     </a>
