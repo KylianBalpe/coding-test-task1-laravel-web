@@ -8,25 +8,18 @@
         <div class="card">
             <div class="card-body login-card-body rounded-lg">
                 <p class="login-box-msg">Login to continue</p>
-                @if (session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <div class="d-flex flex-row align-items-start">
-                            <i class="fas fa-ban mr-2"></i>
-                            <p class="m-0">{{ session('error') }}</p>
-                        </div>
-                    </div>
-                @elseif(session()->has('success'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <div class="d-flex flex-row align-items-start">
-                            <i class="fas fa-check mr-2 mt-1"></i>
-                            <p class="m-0">{{ session('success') }}</p>
-                        </div>
-                    </div>
-                @endif
-                <form action="{{ route('auth.authenticate') }}" method="post">
+                <form action="{{ route('auth.doRegister') }}" method="post">
                     @csrf
+                    <div class="form-group mb-3">
+                        <label for="name">Email</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                               placeholder="Your name" name="name" id="name" value="{{ old('name') }}">
+                        @error('name')
+                        <div class="invalid-feedback mb-1">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
                     <div class="form-group mb-3">
                         <label for="email">Email</label>
                         <input type="text" class="form-control @error('email') is-invalid @enderror"
@@ -49,12 +42,11 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </div>
                     </div>
                     <div class="row d-flex flex-column justify-content-center align-items-center mt-2">
-                        <p class="m-0">Don't have an account? <a href="{{ route("auth.register") }}">register here</a>
-                        </p>
+                        <p class="m-0">Don't have an account?</p>
                     </div>
                 </form>
             </div>

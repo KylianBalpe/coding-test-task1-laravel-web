@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,40 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
+    public function register(): View
+    {
+        $title = 'Register';
+        return view('auth.register', compact('title'));
+    }
+
+    public function doRegister(Request $request): RedirectResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6'
+        ], ['name.required' => 'Name is required',
+            'name.string' => 'Name must be a string',
+            'name.max' => 'Name must not be greater than 255 characters',
+            'email.required' => 'Email is required',
+            'email.email' => 'Email is invalid',
+            'email.unique' => 'Email is already taken',
+            'password.required' => 'Password is required',
+            'password.min' => 'Password must be at least 6 characters',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $data = $validator->validated();
+        $data['password'] = bcrypt($data['password']);
+
+        User::create($data);
+
+        return redirect()->route('auth.login')->with('success', 'Registration successful, now you can login with your account');
+    }
+
     public function login(): View
     {
         $title = 'Login';
@@ -40,7 +75,7 @@ class AuthController extends Controller
             if ($user->role === 'admin') {
                 return redirect()->intended(route('dashboard'));
             }
-            
+
             return redirect()->intended(route('home'));
         }
 

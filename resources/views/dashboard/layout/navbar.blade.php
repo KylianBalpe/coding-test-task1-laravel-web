@@ -14,7 +14,7 @@
                     @csrf
                     <button type="submit" class="dropdown-item d-flex align-items-center">
                         <i class="fas fa-sign-out-alt mr-2"></i>
-                        Keluar
+                        Logout
                     </button>
                 </form>
             </div>

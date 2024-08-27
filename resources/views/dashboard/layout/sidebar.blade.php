@@ -23,45 +23,12 @@
                     </a>
                 </li>
                 <li class="nav-header">MENU</li>
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="{{ route('club.index') }}" class="nav-link {{ Request::is('club*') ? 'active' : '' }}">--}}
-                {{--                        <i class="nav-icon fas fa-shield-alt"></i>--}}
-                {{--                        <p>Club</p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="{{ route('player.index') }}"--}}
-                {{--                       class="nav-link {{ Request::is('player*') ? 'active' : '' }}">--}}
-                {{--                        <i class="nav-icon far fa-futbol"></i>--}}
-                {{--                        <p>Pemain</p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="{{ route('wasit.index') }}" class="nav-link {{ Request::is('wasit*') ? 'active' : '' }}">--}}
-                {{--                        <i class="nav-icon fas fa-user-tie"></i>--}}
-                {{--                        <p>Wasit</p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="{{ route('ssb.index') }}" class="nav-link {{ Request::is('ssb*') ? 'active' : '' }}">--}}
-                {{--                        <i class="nav-icon fas fa-school"></i>--}}
-                {{--                        <p>SSB</p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="{{ route('pertandingan.index') }}"--}}
-                {{--                       class="nav-link {{ Request::is('pertandingan*') ? 'active' : '' }}">--}}
-                {{--                        <i class="nav-icon fas fa-flag-checkered"></i>--}}
-                {{--                        <p>Pertandingan</p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="{{ route('user.index') }}"--}}
-                {{--                       class="nav-link {{ Request::is('user*') ? 'active' : '' }}">--}}
-                {{--                        <i class="nav-icon fas fa-users"></i>--}}
-                {{--                        <p>Users</p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
+                <li class="nav-item">
+                    <a href="" class="nav-link {{ Request::is('category*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-cubes"></i>
+                        <p>Category</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

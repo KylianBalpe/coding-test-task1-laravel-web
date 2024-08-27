@@ -18,15 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::prefix('')->as('auth.')->group(function () {
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::controller(AuthController::class)->prefix('')->as('auth.')->group(function () {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register', 'doRegister')->name('doRegister');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'authenticate')->name('authenticate');
+    Route::post('/logout', 'logout')->name('logout');
 });
-
-//Route::prefix('dashboard')-as('dashboard.')->group(function () {
-//    Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
-//});
 
 Route::get('/dashboard', function () {
     return view('dashboard.index', ['title' => 'Dashboard']);
