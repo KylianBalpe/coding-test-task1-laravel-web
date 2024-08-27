@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::controller(AuthController::class)->prefix('')->as('auth.')->group(function () {
+Route::controller(AuthController::class)->as('auth.')->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/register', 'doRegister')->name('doRegister');
     Route::get('/login', 'login')->name('login');

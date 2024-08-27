@@ -46,7 +46,8 @@
                         </div>
                     </div>
                     <div class="row d-flex flex-column justify-content-center align-items-center mt-2">
-                        <p class="m-0">Don't have an account?</p>
+                        <p class="m-0">Already have an account? <a href="{{ route("auth.login") }}">login here</a>
+                        </p>
                     </div>
                 </form>
             </div>
