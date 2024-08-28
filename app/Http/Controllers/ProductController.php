@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
@@ -60,6 +61,7 @@ class ProductController extends Controller
         ]);
 
         if ($validator->fails()) {
+            Log::info('Validation failed:' . json_encode($validator->errors()->all(), JSON_PRETTY_PRINT));
             return back()->withErrors($validator)->withInput();
         }
 
@@ -72,8 +74,10 @@ class ProductController extends Controller
             $product['image'] = $imageName;
         }
 
+        Log::info('Insert product to db :' . json_encode($product, JSON_PRETTY_PRINT));
         Product::create($product);
 
+        Log::info('Product created successfully');
         return redirect()->route('product.index')->with('success', 'Product created successfully');
     }
 
@@ -91,7 +95,7 @@ class ProductController extends Controller
         $title = 'Product';
         $title_2 = 'Edit Product';
 
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $categories = Category::all();
 
         return view('dashboard.product.edit', compact('title', 'title_2', 'product', 'categories'));
@@ -99,13 +103,13 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|integer',
-            'image' => 'mimes:jpeg,png,jpg,webp|max:10240',
+            'image' => 'nullable|mimes:jpeg,png,jpg,webp|max:10240',
             'category_id' => 'required|integer',
         ], ['name.required' => 'Product name is required',
             'name.string' => 'Product name must be a string',
@@ -146,7 +150,7 @@ class ProductController extends Controller
 
     public function delete($id): RedirectResponse
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         if ($product->image) {
             Storage::disk('public')->delete('images/product/' . $product->image);

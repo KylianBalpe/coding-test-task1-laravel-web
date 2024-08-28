@@ -49,14 +49,14 @@ class CategoryController extends Controller
     {
         $title = 'Category';
         $title_2 = 'Edit Category';
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
         return view('dashboard.category.edit', compact('title', 'title_2', 'category'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
@@ -77,7 +77,7 @@ class CategoryController extends Controller
 
     public function delete($id): RedirectResponse
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $category->delete();
 
         return redirect()->route('category.index')->with('success', 'Category deleted successfully');
