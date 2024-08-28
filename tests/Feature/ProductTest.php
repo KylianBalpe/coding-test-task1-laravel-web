@@ -44,7 +44,7 @@ class ProductTest extends TestCase
             'description' => 'Description Product 1',
             'price' => 10000,
             'category_id' => $category->id,
-            'image' => $product->image, // Verify the actual stored image name
+            'image' => $product->image,
         ]);
 
         Storage::disk('public')->assertExists('images/product/' . $product->image);
