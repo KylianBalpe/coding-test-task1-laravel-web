@@ -73,10 +73,10 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->role === 'admin') {
-                return redirect()->intended(route('dashboard'));
+                return redirect()->intended(route('dashboard.index'));
             }
 
-            return redirect()->intended(route('home'));
+            return redirect()->intended(route('home.index'));
         }
 
         return back()->with('error', 'Invalid credentials')->withInput();

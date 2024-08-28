@@ -1,5 +1,5 @@
 <aside class="main-sidebar sidebar-light-primary elevation-1">
-    <a href="{{ route('dashboard') }}" class="brand-link text-center">
+    <a href="{{ route('dashboard.index') }}" class="brand-link text-center">
         <span class="brand-text">{{ config('app.name') }}</span>
     </a>
 
@@ -17,7 +17,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.index') }}"
+                       class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -25,14 +26,14 @@
                 <li class="nav-header">MENU</li>
                 <li class="nav-item">
                     <a href="{{ route('category.index') }}"
-                       class="nav-link {{ Request::is('category*') ? 'active' : '' }}">
+                       class="nav-link {{ Request::is('dashboard/category*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cubes"></i>
                         <p>Category</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('product.index') }}"
-                       class="nav-link {{ Request::is('product*') ? 'active' : '' }}">
+                       class="nav-link {{ Request::is('dashboard/product*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>Product</p>
                     </a>

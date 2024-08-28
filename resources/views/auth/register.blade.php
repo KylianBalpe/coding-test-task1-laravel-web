@@ -49,6 +49,10 @@
                         <p class="m-0">Already have an account? <a href="{{ route("auth.login") }}">login here</a>
                         </p>
                     </div>
+                    <div class="row d-flex flex-column justify-content-center align-items-center mt-2">
+                        <p class="m-0"><a href="{{ route("home.index") }}">Back to home</a>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>

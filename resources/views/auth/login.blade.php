@@ -56,6 +56,10 @@
                         <p class="m-0">Don't have an account? <a href="{{ route("auth.register") }}">register here</a>
                         </p>
                     </div>
+                    <div class="row d-flex flex-column justify-content-center align-items-center mt-2">
+                        <p class="m-0"><a href="{{ route("home.index") }}">Back to home</a>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>

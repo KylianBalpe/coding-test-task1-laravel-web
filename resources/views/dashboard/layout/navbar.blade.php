@@ -5,6 +5,7 @@
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">
+        <a href="{{ route('home.index') }}" class="nav-link">Homepage</a>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="fas fa-cog"></i>
