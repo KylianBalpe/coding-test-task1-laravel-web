@@ -30,6 +30,13 @@
                         <p>Category</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('product.index') }}"
+                       class="nav-link {{ Request::is('product*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-boxes"></i>
+                        <p>Product</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

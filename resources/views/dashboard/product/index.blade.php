@@ -26,9 +26,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-row justify-content-end">
-                                    <a href="{{ route('category.create') }}" class="btn btn-primary mb-4">
+                                    <a href="{{ route('product.create') }}" class="btn btn-primary mb-4">
                                         <i class="fas fa-plus mr-2"></i>
-                                        Add Category
+                                        Add Product
                                     </a>
                                 </div>
                                 <div class="table-responsive m-0    ">
@@ -37,20 +37,34 @@
                                         <tr>
                                             <th class="text-center" style="width: 40px">No</th>
                                             <th>Name</th>
+                                            <th class="w-25">Description</th>
+                                            <th>Price</th>
+                                            <th>Category</th>
+                                            <th class="text-center" style="width: 100px">Image</th>
                                             <th class="text-center" style="width: 260px">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse ($categories as $item)
+                                        @forelse ($products as $item)
                                             <tr>
                                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                                 <td class="align-middle">{{ $item->name }}</td>
+                                                <td class="align-middle">{{ $item->description }}</td>
+                                                <td class="align-middle">{{ $item->price }}</td>
+                                                <td class="align-middle">{{ $item->category->name }}</td>
                                                 <td class="text-center align-middle">
-                                                    <a href="{{ route('category.edit', $item->id) }}"
+                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                            data-toggle="modal"
+                                                            data-target="#imgModal{{ $item->id }}">
+                                                        Image
+                                                    </button>
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    <a href="{{ route('product.edit', $item->id) }}"
                                                        class="btn btn-sm btn-warning mr-2">
                                                         <span><i class="fas fa-pencil-alt mr-2"></i>Edit</span>
                                                     </a>
-                                                    <form action="{{ route('category.delete', $item->id) }}"
+                                                    <form action="{{ route('product.delete', $item->id) }}"
                                                           method="post"
                                                           class="d-inline">
                                                         @csrf
@@ -63,14 +77,14 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="3" class="text-center p-5">Category data is empty</td>
+                                                <td colspan="7" class="text-center p-5">Product data is empty</td>
                                             </tr>
                                         @endforelse
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="d-flex justify-content-center pt-3">
-                                    {{ $categories->links() }}
+                                    {{ $products->links() }}
                                 </div>
                             </div>
                         </div>
@@ -78,6 +92,28 @@
                 </div>
             </div>
         </section>
+
+        @foreach($products as $item)
+            <div class="modal fade show" id="imgModal{{ $item->id }}" aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Image of {{ $item->name }}</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img class="image img-fluid" src="{{ asset('storage/images/product/' . $item->image) }}"
+                                 alt="{{ $item->name  }}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection
 
