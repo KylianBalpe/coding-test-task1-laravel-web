@@ -12,12 +12,29 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
         $title = 'Product';
-        $products = Product::with('category')->paginate(10);
+        $categories = Category::all();
 
-        return view('dashboard.product.index', compact('title', 'products'));
+        $product = Product::with('category');
+        $categoryRequest = $request->query('category');
+        $searchRequest = $request->query('search');
+
+        if ($categoryRequest) {
+            $product->where('category_id', $request->query('category'));
+        }
+
+        if ($searchRequest) {
+            $product->where(function ($query) use ($searchRequest) {
+                $query->where('name', 'like', '%' . $searchRequest . '%')
+                    ->orWhere('description', 'like', '%' . $searchRequest . '%');
+            });
+        }
+
+        $products = $product->paginate(10)->appends(['category' => $categoryRequest, 'search' => $searchRequest]);
+
+        return view('dashboard.product.index', compact('title', 'products', 'categories', 'categoryRequest', 'searchRequest'));
     }
 
     public function store(Request $request): RedirectResponse

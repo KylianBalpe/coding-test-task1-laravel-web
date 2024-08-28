@@ -25,7 +25,35 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex flex-row justify-content-end">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <form method="GET" action="{{ route('product.index') }}"
+                                          class="d-flex flex-row justify-content-center align-items-center">
+                                        <div class="form-inline">
+                                            <div class="input-group">
+                                                <input class="form-control" type="search" name="search"
+                                                       placeholder="Search Product"
+                                                       aria-label="Search" value="{{ $searchRequest }}">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-dark" type="submit">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-inline">
+                                            <select name="category" class="custom-select mx-2"
+                                                    onchange="this.form.submit()">
+                                                <option selected value="">All Categories</option>
+                                                @foreach($categories as $category)
+                                                    <option
+                                                        value="{{ $category->id }}" {{ $category->id == $categoryRequest ? 'selected' : '' }}>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                    </form>
                                     <a href="{{ route('product.create') }}" class="btn btn-primary mb-4">
                                         <i class="fas fa-plus mr-2"></i>
                                         Add Product
@@ -50,7 +78,8 @@
                                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                                 <td class="align-middle">{{ $item->name }}</td>
                                                 <td class="align-middle">{{ $item->description }}</td>
-                                                <td class="align-middle">{{ $item->price }}</td>
+                                                <td class="align-middle">
+                                                    Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
                                                 <td class="align-middle">{{ $item->category->name }}</td>
                                                 <td class="text-center align-middle">
                                                     <button type="button" class="btn btn-sm btn-primary"

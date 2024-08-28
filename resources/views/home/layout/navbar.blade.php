@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white sticky-top">
     <div class="container">
         <a href="{{ route('home.index') }}" class="navbar-brand">
             <img src="{{ asset('assets/img/laravel.png') }}" alt="{{ config('app.name') }} Logo"

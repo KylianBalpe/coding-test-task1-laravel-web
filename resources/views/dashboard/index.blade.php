@@ -63,7 +63,8 @@
                                             <tr>
                                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                                 <td class="align-middle">{{ $item->name }}</td>
-                                                <td class="align-middle">{{ $item->price }}</td>
+                                                <td class="align-middle">
+                                                    Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
                                                 <td class="align-middle">{{ $item->category->name }}</td>
                                             </tr>
                                         @empty

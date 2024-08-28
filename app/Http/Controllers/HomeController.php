@@ -12,8 +12,9 @@ class HomeController extends Controller
     public function index(): View
     {
         $title = 'Home';
+        $products = Product::latest()->limit(4)->get();
 
-        return view('home.index', compact('title'));
+        return view('home.index', compact('title', 'products'));
     }
 
     public function product(Request $request): View
@@ -36,7 +37,7 @@ class HomeController extends Controller
             });
         }
 
-        $products = $product->get();
+        $products = $product->paginate(8)->appends(['category' => $requestCategory, 'search' => $searchRequest]);
 
         return view('home.product', compact('title', 'products', 'categories', 'requestCategory', 'searchRequest'));
     }

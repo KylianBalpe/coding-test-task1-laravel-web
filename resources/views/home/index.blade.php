@@ -6,15 +6,44 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"> Top Navigation <small>Example 3.0</small></h1>
+                        <h1 class="m-0">Latest Products</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                            <li class="breadcrumb-item active">Top Navigation</li>
-                        </ol>
-                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    @forelse($products as $item)
+                        <div class="col-md-4 col-xl-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <img class="image img-fluid"
+                                         src="{{ asset('storage/images/product/' . $item->image) }}"
+                                         alt="{{ $item->name }}">
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex flex-column">
+                                        <div class="card-title font-weight-bold mb-1">
+                                            {{ $item->name }}
+                                        </div>
+                                        <p class="m-0 text-truncate">{{ $item->description }}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex flex-row justify-content-between align-items-center">
+                                        <span class="m-0">Rp. {{ number_format($item->price, 0, ',', '.') }}</span>
+                                        <span class="badge badge-primary px-2 py-1">{{ $item->category->name }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-center">No products found.</p>
+                    @endforelse
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <a href="{{ route('home.product') }}" class="btn btn-outline-primary">View all products</a>
                 </div>
             </div>
         </div>
